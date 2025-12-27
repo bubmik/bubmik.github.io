@@ -24,13 +24,53 @@
         }
         
         body {
-            background-color: var(--bg);
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
+            position: relative;
             color: var(--text);
             font-family: 'JetBrains Mono', 'Space Mono', monospace;
             font-size: 14px;
             line-height: 1.7;
             font-weight: 300;
             overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.015) 2px,
+                    rgba(255, 255, 255, 0.015) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.015) 2px,
+                    rgba(255, 255, 255, 0.015) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 2;
         }
         
         .cursor {
@@ -50,9 +90,11 @@
         
         .container {
             max-width: 700px;
-            margin: 0 auto;
+            margin-left: 12%;
             padding: 60px 30px;
             min-height: 100vh;
+            position: relative;
+            z-index: 3;
         }
         
         .header {
@@ -168,29 +210,37 @@
         }
         
         .music-player {
-            background: rgba(20, 20, 20, 0.5);
+            background: rgba(20, 20, 20, 0.3);
             border: 1px solid var(--border);
             border-radius: 4px;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 15px 20px;
+            margin-top: 80px;
+            margin-bottom: 20px;
+            max-width: 450px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .music-player:hover {
+            opacity: 1;
         }
         
         .player-controls {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 10px;
         }
         
         .play-btn {
             background: transparent;
             border: 1px solid var(--accent);
             color: var(--accent);
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -256,9 +306,10 @@
         }
         
         .track-info {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-dim);
             text-align: center;
+            opacity: 0.6;
         }
         
         .contacts {
@@ -297,6 +348,8 @@
         @media (max-width: 600px) {
             .container {
                 padding: 40px 20px;
+                margin-left: 5%;
+                max-width: 90%;
             }
             
             h1 {
@@ -309,6 +362,10 @@
             
             .contacts {
                 flex-direction: column;
+            }
+            
+            .music-player {
+                max-width: 100%;
             }
         }
         
@@ -343,68 +400,50 @@
     ╰─────────────╯</div>
             <h1>bubmik</h1>
             <div class="subtitle">also known as th3traizy</div>
-            <p class="intro">приветики! я тут, просто тихо<span class="cursor"></span></p>
+            <p class="intro">привет! заходи, тут спокойно ;3<span class="cursor"></span></p>
             <p class="easter-egg">p.s меня можно найти по пути - c:\user\discord\th3traizy</p>
+            <p style="margin-top: 15px; opacity: 0.5; font-size: 12px; color: var(--text-dim);">я тут не для впечатлений - просто мне тут нормально</p>
         </header>
         
         <main>
             <section class="section">
                 <h2 class="section-title">кто такой bubmik</h2>
                 <div class="section-content">
-                    <p>bubmik - паранойный человек с spotify под рукой</p>
-                    <p>любитель шоколада, имея при этом сахарный диабет</p>
+                    <p>человек с плейлистом в кармане и паранойей в голове</p>
+                    <p>ем шоколад несмотря на сахарный диабет - ну а что поделать</p>
+                    <p>кажусь замкнутым, но просто берегу своё</p>
+                    <p>не от злобы, а для себя</p>
                 </div>
             </section>
             
             <section class="section">
                 <h2 class="section-title">что такое bubmik</h2>
                 <div class="section-content">
-                    <p>bubmik - меломан</p>
-                    <p>можно встретить где угодно</p>
-                    <p>иногда я mika</p>
-                    <p>иногда кто угодно другой</p>
-                    <p>не всегда заранее понятно</p>
+                    <p>меломан, если коротко</p>
+                    <p>можно встретить где угодно, иногда в самых странных местах</p>
+                    <p>иногда я кто-то совсем другой</p>
+                    <p>заранее не скажу кто - сам не всегда знаю</p>
+                    <p>эмоции есть, просто показываю их редко и тихо</p>
                 </div>
             </section>
             
-            <section class="section">
-                <h2 class="section-title">музыка</h2>
-                <div class="section-content">
-                    <p style="margin-bottom: 12px;">артисты:</p>
-                    <div class="list-item">h4rtbrkr</div>
-                    <div class="list-item">sati akura</div>
-                    <div class="list-item">hatsune miku</div>
-                    <div class="list-item">flavor foley</div>
-                    
-                    <div class="music-player">
-                        <div class="player-controls">
-                            <button class="play-btn" id="playBtn">▶</button>
-                            <div class="volume-control">
-                                <span class="volume-label">vol</span>
-                                <input type="range" id="volumeSlider" min="0" max="100" value="50">
-                                <span class="volume-label" id="volumeValue">50%</span>
-                            </div>
-                        </div>
-                        <div class="track-info">неа! музыку люблю! а вот play button не работает ;(</div>
-                    </div>
-                </div>
-            </section>
+            <div style="margin: 50px 0; padding-left: 15px; opacity: 0.6; font-size: 13px; color: var(--text-dim); font-style: italic;">
+                если ты всё ещё читаешь - значит тут не так уж скучно, наверное
+            </div>
             
             <section class="section">
                 <h2 class="section-title">техническое</h2>
                 <div class="section-content">
-                    <p style="margin-bottom: 12px;">имеется понимание что такое:</p>
-                    <div class="list-item">c++</div>
-                    <div class="list-item">python</div>
-                    <div class="list-item">luau</div>
+                    <p>имеется пнятие что такое цифорки и букофки</p>
+                    <p>а точнее c++ / luau / python</p>
                 </div>
             </section>
             
             <section class="section">
                 <h2 class="section-title">дополнительно</h2>
                 <div class="section-content">
-                    <div class="list-item">игры - неа</div>
-                    <div class="list-item">визуальные новеллы - да</div>
+                    <div class="list-item">игры - неа, не моё</div>
+                    <div class="list-item">визуальные новеллы - о да, очень даже :3</div>
                 </div>
             </section>
             
@@ -414,19 +453,31 @@
                     <div class="contacts">
                         <a href="https://steamcommunity.com/id/bubmik/" class="contact-link" target="_blank">[ steam ]</a>
                         <a href="#" class="contact-link" onclick="copyDiscord(event)">[ discord ]</a>
-                        <a href="mailto:thetraizy@gmail.com" class="contact-link">[ email ]</a>
+                        <a href="/cdn-cgi/l/email-protection#b2c6dad7c6c0d3dbc8cbf2d5dfd3dbde9cd1dddf" class="contact-link">[ email ]</a>
                     </div>
                 </div>
             </section>
         </main>
         
+        <div class="music-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn">▶</button>
+                <div class="volume-control">
+                    <span class="volume-label">vol</span>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    <span class="volume-label" id="volumeValue">50%</span>
+                </div>
+            </div>
+            <div class="track-info">музыка была бы тут, но пока просто тишина - и это тоже неплохо</div>
+        </div>
+        
         <footer class="footer">
             <div class="ascii-art" style="opacity: 0.4; margin-bottom: 10px;">───────────</div>
-            <p>тихо и аккуратно, немного странно</p>
+            <p>тихо, уютно и немного странно - но мне тут хорошо</p>
         </footer>
     </div>
     
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Music player functionality
         const playBtn = document.getElementById('playBtn');
         const volumeSlider = document.getElementById('volumeSlider');
@@ -489,9 +540,4 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
             const scrolled = window.pageYOffset;
-            header.style.transform = `translateY(${scrolled * 0.3}px)`;
-            header.style.opacity = 1 - (scrolled / 400);
-        });
-    </script>
-</body>
-</html>
+            header.s
