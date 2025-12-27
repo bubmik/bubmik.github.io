@@ -1,1 +1,548 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bubmik</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: #0a0a0a;
+            --text: #d4d4d4;
+            --text-dim: #7a7a7a;
+            --accent: #9ca3af;
+            --accent-bright: #e5e7eb;
+            --border: #2a2a2a;
+            --glow: rgba(156, 163, 175, 0.15);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
+            position: relative;
+            color: var(--text);
+            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.015) 2px,
+                    rgba(255, 255, 255, 0.015) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.015) 2px,
+                    rgba(255, 255, 255, 0.015) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 18px;
+            background: var(--accent);
+            margin-left: 2px;
+            animation: blink 1.2s infinite;
+            vertical-align: text-bottom;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .container {
+            max-width: 700px;
+            margin-left: 12%;
+            padding: 60px 30px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .header {
+            margin-bottom: 80px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .ascii-art {
+            color: var(--text-dim);
+            font-size: 11px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            opacity: 0.6;
+            white-space: pre;
+            font-family: monospace;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--accent-bright);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+        
+        .intro {
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .easter-egg {
+            color: var(--text-dim);
+            font-size: 12px;
+            opacity: 0.5;
+            font-style: italic;
+            transition: opacity 0.3s;
+        }
+        
+        .easter-egg:hover {
+            opacity: 1;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+            padding-left: 15px;
+            border-left: 1px solid var(--border);
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+        .section:nth-child(5) { animation-delay: 0.4s; }
+        .section:nth-child(6) { animation-delay: 0.5s; }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 16px;
+            color: var(--accent-bright);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .section-content {
+            color: var(--text);
+            line-height: 1.8;
+        }
+        
+        .section-content p {
+            margin-bottom: 10px;
+        }
+        
+        .list-item {
+            margin-bottom: 6px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .list-item:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--text-dim);
+        }
+        
+        .music-player {
+            background: rgba(20, 20, 20, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 15px 20px;
+            margin-top: 80px;
+            margin-bottom: 20px;
+            max-width: 450px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .music-player:hover {
+            opacity: 1;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .play-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-family: monospace;
+        }
+        
+        .play-btn:hover {
+            background: var(--accent);
+            color: var(--bg);
+            box-shadow: 0 0 15px var(--glow);
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        
+        .volume-label {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--accent-bright);
+            box-shadow: 0 0 8px var(--glow);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        input[type="range"]::-moz-range-thumb:hover {
+            background: var(--accent-bright);
+            box-shadow: 0 0 8px var(--glow);
+        }
+        
+        .track-info {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-align: center;
+            opacity: 0.6;
+        }
+        
+        .contacts {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            color: var(--accent);
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 13px;
+        }
+        
+        .contact-link:hover {
+            border-color: var(--accent);
+            background: rgba(156, 163, 175, 0.05);
+            box-shadow: 0 0 10px var(--glow);
+        }
+        
+        .footer {
+            margin-top: 100px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 12px;
+            animation: fadeIn 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+                margin-left: 5%;
+                max-width: 90%;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .ascii-art {
+                font-size: 9px;
+            }
+            
+            .contacts {
+                flex-direction: column;
+            }
+            
+            .music-player {
+                max-width: 100%;
+            }
+        }
+        
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="ascii-art">    ╭─────────────╮
+    │  ◠  ◡  ◠  │
+    ╰─────────────╯</div>
+            <h1>bubmik</h1>
+            <div class="subtitle">also known as th3traizy</div>
+            <p class="intro">привет! заходи, тут спокойно ;3<span class="cursor"></span></p>
+            <p class="easter-egg">p.s меня можно найти по пути - c:\user\discord\th3traizy</p>
+            <p style="margin-top: 15px; opacity: 0.5; font-size: 12px; color: var(--text-dim);">я тут не для впечатлений - просто мне тут нормально</p>
+        </header>
+        
+        <main>
+            <section class="section">
+                <h2 class="section-title">кто такой bubmik</h2>
+                <div class="section-content">
+                    <p>человек с плейлистом в кармане и паранойей в голове</p>
+                    <p>ем шоколад несмотря на сахарный диабет - ну а что поделать</p>
+                    <p>кажусь замкнутым, но просто берегу своё</p>
+                    <p>не от злобы, а для себя</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">что такое bubmik</h2>
+                <div class="section-content">
+                    <p>меломан, если коротко</p>
+                    <p>можно встретить где угодно, иногда в самых странных местах</p>
+                    <p>иногда я кто-то совсем другой</p>
+                    <p>заранее не скажу кто - сам не всегда знаю</p>
+                    <p>эмоции есть, просто показываю их редко и тихо</p>
+                </div>
+            </section>
+            
+            <div style="margin: 50px 0; padding-left: 15px; opacity: 0.6; font-size: 13px; color: var(--text-dim); font-style: italic;">
+                если ты всё ещё читаешь - значит тут не так уж скучно, наверное
+            </div>
+            
+            <section class="section">
+                <h2 class="section-title">техническое</h2>
+                <div class="section-content">
+                    <p>имеется пнятие что такое цифорки и букофки</p>
+                    <p>а точнее c++ / luau / python</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">дополнительно</h2>
+                <div class="section-content">
+                    <div class="list-item">игры - неа, не моё</div>
+                    <div class="list-item">визуальные новеллы - о да, очень даже :3</div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">контакты</h2>
+                <div class="section-content">
+                    <div class="contacts">
+                        <a href="https://steamcommunity.com/id/bubmik/" class="contact-link" target="_blank">[ steam ]</a>
+                        <a href="#" class="contact-link" onclick="copyDiscord(event)">[ discord ]</a>
+                        <a href="/cdn-cgi/l/email-protection#b2c6dad7c6c0d3dbc8cbf2d5dfd3dbde9cd1dddf" class="contact-link">[ email ]</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <div class="music-player">
+            <div class="player-controls">
+                <button class="play-btn" id="playBtn">▶</button>
+                <div class="volume-control">
+                    <span class="volume-label">vol</span>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    <span class="volume-label" id="volumeValue">50%</span>
+                </div>
+            </div>
+            <div class="track-info">музыка была бы тут, но пока просто тишина - и это тоже неплохо</div>
+        </div>
+        
+        <footer class="footer">
+            <div class="ascii-art" style="opacity: 0.4; margin-bottom: 10px;">───────────</div>
+            <p>тихо, уютно и немного странно - но мне тут хорошо</p>
+        </footer>
+    </div>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Music player functionality
+        const playBtn = document.getElementById('playBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        let isPlaying = false;
+        
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.textContent = isPlaying ? '⏸' : '▶';
+            
+            // Placeholder for actual audio functionality
+            if (isPlaying) {
+                console.log('playing music (placeholder)');
+            } else {
+                console.log('paused music (placeholder)');
+            }
+        });
+        
+        volumeSlider.addEventListener('input', (e) => {
+            volumeValue.textContent = e.target.value + '%';
+            // Placeholder for actual volume control
+            console.log('volume:', e.target.value);
+        });
+        
+        // Discord copy functionality
+        function copyDiscord(e) {
+            e.preventDefault();
+            const discord = 'bubmik';
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(discord).then(() => {
+                    const link = e.target;
+                    const originalText = link.textContent;
+                    link.textContent = '[ скопировано! ]';
+                    setTimeout(() => {
+                        link.textContent = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    alert('discord: bubmik');
+                });
+            } else {
+                alert('discord: bubmik');
+            }
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add subtle parallax effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            const scrolled = window.pageYOffset;
+            header.style.transform = `translateY(${scrolled * 0.3}px)`;
+            header.style.opacity = 1 - (scrolled / 400);
+        });
+    </script>
+</body>
+</html>
