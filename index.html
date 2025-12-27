@@ -479,10 +479,12 @@
     
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Music player functionality
-        const playBtn = document.getElementById('playBtn');
+       const playBtn = document.getElementById('playBtn');
         const volumeSlider = document.getElementById('volumeSlider');
         const volumeValue = document.getElementById('volumeValue');
         let isPlaying = false;
+        
+        // Audio setup
         let audio = new Audio('music.m4a');
         audio.volume = 0.5;
         audio.loop = true;
@@ -498,7 +500,7 @@
             }
         });
         
-volumeSlider.addEventListener('input', (e) => {
+        volumeSlider.addEventListener('input', (e) => {
             const volume = e.target.value / 100;
             audio.volume = volume;
             volumeValue.textContent = e.target.value + '%';
