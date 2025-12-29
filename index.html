@@ -47,11 +47,12 @@
         
         .float-word {
             position: absolute;
-            color: rgba(255, 255, 255, 0.08);
-            font-size: 20px;
+            color: rgba(180, 180, 180, 0.15);
+            font-size: 22px;
             white-space: nowrap;
-            animation: float-drift 30s infinite ease-in-out;
+            animation: float-drift 25s infinite ease-in-out;
             font-weight: 300;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
         
         @keyframes float-drift {
@@ -59,14 +60,14 @@
                 transform: translate(0, 0) rotate(0deg);
                 opacity: 0;
             }
-            10% {
-                opacity: 0.08;
+            15% {
+                opacity: 0.15;
             }
             50% {
-                opacity: 0.12;
+                opacity: 0.2;
             }
-            90% {
-                opacity: 0.08;
+            85% {
+                opacity: 0.15;
             }
             100% {
                 transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
@@ -430,18 +431,16 @@
         }
         
         // Create initial words
-        for (let i = 0; i < 40; i++) {
-            setTimeout(() => createFloatingWord(), i * 150);
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => createFloatingWord(), i * 100);
         }
         
         // Keep creating words
-        setInterval(() => createFloatingWord(), 1500);
+        setInterval(() => createFloatingWord(), 1000);
         
         // EASTER EGG - Links to existence questionnaire
         function easterEgg() {
-            // This should link to your second GitHub Pages project
-            window.location.href = 'https://bubmik.github.io/what_is';
-            // Replace 'yourusername' with your actual GitHub username
+            window.open('https://bubmik.github.io/what_is', '_self');
         }
         
         // DISCORD COPY
