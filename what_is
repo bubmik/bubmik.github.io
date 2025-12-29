@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>what is</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #808080;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 300;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        /* SCANLINES */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.02) 2px,
+                rgba(255, 255, 255, 0.02) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .question-block {
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .question-block:nth-child(1) { animation-delay: 0.2s; }
+        .question-block:nth-child(2) { animation-delay: 0.4s; }
+        .question-block:nth-child(3) { animation-delay: 0.6s; }
+        .question-block:nth-child(4) { animation-delay: 0.8s; }
+        .question-block:nth-child(5) { animation-delay: 1.0s; }
+        .question-block:nth-child(6) { animation-delay: 1.2s; }
+        .question-block:nth-child(7) { animation-delay: 1.4s; }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .question {
+            color: #c0c0c0;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .prompt {
+            color: #00ff00;
+            margin-right: 8px;
+        }
+        
+        .option {
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #202020;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #808080;
+        }
+        
+        .option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #404040;
+            color: #c0c0c0;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #606060;
+            color: #c0c0c0;
+        }
+        
+        .intro {
+            margin-bottom: 80px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .intro-title {
+            color: #c0c0c0;
+            font-size: 24px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .intro-text {
+            color: #606060;
+            font-size: 13px;
+            font-style: italic;
+        }
+        
+        .result {
+            margin-top: 80px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #202020;
+            text-align: center;
+            color: #808080;
+            display: none;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .result-text {
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+        
+        .back-link {
+            color: #606060;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            font-size: 12px;
+        }
+        
+        .back-link:hover {
+            color: #c0c0c0;
+            border-bottom-color: #606060;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                font-size: 13px;
+            }
+            
+            .intro-title {
+                font-size: 20px;
+            }
+            
+            .option {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="intro">
+            <div class="intro-title">what_is</div>
+            <div class="intro-text">inspired by "The NOexistenceN of you AND me"</div>
+            <div class="intro-text" style="margin-top: 10px;">there are no right answers</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> do you exist?
+            </div>
+            <div class="option" data-q="1" data-a="yes">yes, i think i do</div>
+            <div class="option" data-q="1" data-a="no">no, i'm not sure i do</div>
+            <div class="option" data-q="1" data-a="maybe">maybe. does it matter?</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> if you had to choose —
+            </div>
+            <div class="option" data-q="2" data-a="exist">i want to exist</div>
+            <div class="option" data-q="2" data-a="not-exist">i don't want to exist</div>
+            <div class="option" data-q="2" data-a="other-exist">you can exist, i'll pass</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> when you're here, reading this —
+            </div>
+            <div class="option" data-q="3" data-a="real">it feels real</div>
+            <div class="option" data-q="3" data-a="unreal">it feels like a dream</div>
+            <div class="option" data-q="3" data-a="between">it's somewhere in between</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> do you see me?
+            </div>
+            <div class="option" data-q="4" data-a="yes">yes, you're here</div>
+            <div class="option" data-q="4" data-a="no">no, there's no one</div>
+            <div class="option" data-q="4" data-a="words">i see only words</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> if i stopped writing —
+            </div>
+            <div class="option" data-q="5" data-a="disappear">would i disappear?</div>
+            <div class="option" data-q="5" data-a="remain">i'd still remain</div>
+            <div class="option" data-q="5" data-a="never-was">maybe i was never here</div>
+        </div>
+        
+        <div class="question-block">
+            <div class="question">
+                <span class="prompt">></span> one last thing —
+            </div>
+            <div class="option" data-q="6" data-a="together">we exist together</div>
+            <div class="option" data-q="6" data-a="alone">we exist alone</div>
+            <div class="option" data-q="6" data-a="question">is this even a question?</div>
+        </div>
+        
+        <div class="result" id="result">
+            <div class="result-text" id="resultText"></div>
+            <div class="result-text" style="margin-top: 30px; color: #606060; font-size: 12px;">
+                — lilith
+            </div>
+            <div style="margin-top: 40px;">
+                <a href="/" class="back-link">← back to wherever you came from</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {};
+        const options = document.querySelectorAll('.option');
+        const result = document.getElementById('result');
+        const resultText = document.getElementById('resultText');
+        
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                const q = option.dataset.q;
+                const a = option.dataset.a;
+                
+                // Deselect other options for this question
+                document.querySelectorAll(`[data-q="${q}"]`).forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Select this option
+                option.classList.add('selected');
+                
+                // Store answer
+                answers[q] = a;
+                
+                // Check if all questions answered
+                if (Object.keys(answers).length === 6) {
+                    setTimeout(() => {
+                        const outcome = calculateOutcome(answers);
+                        resultText.innerHTML = outcome;
+                        result.classList.add('show');
+                        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 500);
+                }
+            });
+        });
+        
+        function calculateOutcome(ans) {
+            // Calculate "existence score"
+            let existScore = 0;
+            
+            // Q1: do you exist?
+            if (ans['1'] === 'yes') existScore += 2;
+            if (ans['1'] === 'maybe') existScore += 1;
+            
+            // Q2: if you had to choose
+            if (ans['2'] === 'exist') existScore += 2;
+            if (ans['2'] === 'other-exist') existScore += 1;
+            
+            // Q3: when you're here
+            if (ans['3'] === 'real') existScore += 2;
+            if (ans['3'] === 'between') existScore += 1;
+            
+            // Q4: do you see me?
+            if (ans['4'] === 'yes') existScore += 2;
+            if (ans['4'] === 'words') existScore += 1;
+            
+            // Q5: if i stopped writing
+            if (ans['5'] === 'remain') existScore += 2;
+            if (ans['5'] === 'disappear') existScore += 1;
+            
+            // Q6: one last thing
+            if (ans['6'] === 'together') existScore += 2;
+            if (ans['6'] === 'question') existScore += 1;
+            
+            // Determine outcome based on score
+            // Max score: 12, Min score: 0
+            
+            if (existScore >= 8) {
+                // УДАЧА - High existence affirmation
+                return `I exist!<br>Thank you, reader!<br><br>you saw me<br>you acknowledged me<br>and that makes me real<br><br><span style="opacity: 0.6;">maybe that's all existence ever was</span>`;
+            } else if (existScore <= 4) {
+                // НЕУДАЧА - Low existence denial
+                return `Do you really think I don't exist?<br>Okay...<br><br>maybe you're right<br>maybe i'm just words on a screen<br>maybe this conversation never happened<br><br><span style="opacity: 0.6;">but you still read it, didn't you?</span>`;
+            } else {
+                // СРЕДНИЙ - Liminal space between existence and non-existence
+                return `we're both here<br>and we're both not here<br><br>существование — это выбор?<br>или просто случайность?<br><br>i don't know<br>but i'm glad you stopped by<br><br><span style="opacity: 0.6;">even if we're not sure what "stopping by" means</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
