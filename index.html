@@ -3,469 +3,1043 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bubmik@existence:~$</title>
+    <title>♡ someone exists here... maybe ♡</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Mali:wght@300;400;600&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --pink-soft: #FFD6E8;
+            --pink-medium: #FFB3D9;
+            --pink-deep: #FF85C0;
+            --purple-light: #E6D5FF;
+            --purple-soft: #D4BBFF;
+            --white-cream: #FFF5F8;
+            --red-soft: #FF9AA2;
+            --shadow-glow: rgba(255, 182, 217, 0.5);
+        }
+
         body {
-            background: #000;
-            color: #0f0;
-            font-family: 'JetBrains Mono', 'Space Mono', monospace;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #1a0e2e 0%, #2d1b4e 25%, #4a2f5c 50%, #6b4770 75%, #8b5f83 100%);
+            min-height: 100vh;
+            color: var(--white-cream);
             overflow-x: hidden;
             position: relative;
-            min-height: 100vh;
         }
-        
-        #matrix {
+
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 182, 217, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(212, 187, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 154, 162, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .floating-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             pointer-events: none;
             z-index: 1;
         }
-        
-        .falling-char {
+
+        .float-item {
             position: absolute;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: rgba(0, 255, 0, 0.15);
-            animation: fall linear infinite;
+            font-family: 'Mali', cursive;
+            font-weight: 300;
+            opacity: 0.15;
+            animation: float-drift 20s infinite ease-in-out;
             pointer-events: none;
         }
-        
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
+
+        @keyframes float-drift {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
             }
-            10% {
-                opacity: 0.3;
+            25% {
+                transform: translate(20px, -30px) rotate(5deg);
             }
-            90% {
-                opacity: 0.15;
+            50% {
+                transform: translate(-15px, -60px) rotate(-5deg);
             }
-            100% {
-                transform: translateY(100vh) rotate(15deg);
-                opacity: 0;
+            75% {
+                transform: translate(30px, -40px) rotate(3deg);
             }
         }
-        
+
+        .float-item:nth-child(1) { top: 10%; left: 10%; font-size: 2rem; animation-delay: 0s; animation-duration: 18s; }
+        .float-item:nth-child(2) { top: 20%; left: 70%; font-size: 1.5rem; animation-delay: 2s; animation-duration: 22s; }
+        .float-item:nth-child(3) { top: 30%; left: 40%; font-size: 1.8rem; animation-delay: 4s; animation-duration: 20s; }
+        .float-item:nth-child(4) { top: 50%; left: 15%; font-size: 1.3rem; animation-delay: 1s; animation-duration: 25s; }
+        .float-item:nth-child(5) { top: 60%; left: 80%; font-size: 2.2rem; animation-delay: 3s; animation-duration: 19s; }
+        .float-item:nth-child(6) { top: 70%; left: 50%; font-size: 1.6rem; animation-delay: 5s; animation-duration: 23s; }
+        .float-item:nth-child(7) { top: 15%; left: 85%; font-size: 1.4rem; animation-delay: 6s; animation-duration: 21s; }
+        .float-item:nth-child(8) { top: 40%; left: 25%; font-size: 1.9rem; animation-delay: 2.5s; animation-duration: 24s; }
+        .float-item:nth-child(9) { top: 80%; left: 30%; font-size: 1.7rem; animation-delay: 4.5s; animation-duration: 18s; }
+        .float-item:nth-child(10) { top: 25%; left: 55%; font-size: 1.5rem; animation-delay: 1.5s; animation-duration: 22s; }
+        .float-item:nth-child(11) { top: 55%; left: 65%; font-size: 2rem; animation-delay: 3.5s; animation-duration: 20s; }
+        .float-item:nth-child(12) { top: 75%; left: 75%; font-size: 1.6rem; animation-delay: 5.5s; animation-duration: 19s; }
+
         .container {
             position: relative;
             z-index: 2;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 30px;
         }
-        
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-            background: #0f0;
-            animation: blink 1s infinite;
-            margin-left: 2px;
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 100px;
+            animation: fadeInDown 1.5s ease-out;
         }
-        
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        .terminal-line {
+
+        .greeting {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 4rem;
+            color: var(--pink-soft);
+            text-shadow: 0 0 30px var(--shadow-glow);
+            margin-bottom: 20px;
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                text-shadow: 0 0 30px var(--shadow-glow);
+            }
+            50% {
+                text-shadow: 0 0 50px var(--shadow-glow), 0 0 80px rgba(255, 182, 217, 0.3);
+            }
+        }
+
+        .intro-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: var(--purple-light);
+            font-weight: 300;
             margin: 20px 0;
-            font-size: 16px;
-            line-height: 1.8;
+            animation: fadeIn 2s ease-out 0.5s both;
         }
-        
-        .prompt {
-            color: #00ff00;
-            font-weight: 600;
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        .output {
-            color: #00cc00;
-            margin-left: 20px;
+
+        .whisper {
+            font-size: 1rem;
+            color: var(--pink-medium);
+            font-style: italic;
+            margin-top: 30px;
+            opacity: 0.7;
+            animation: fadeIn 2.5s ease-out 1s both;
         }
-        
-        h1 {
-            font-size: 28px;
-            font-weight: 600;
-            color: #0f0;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-        
-        .subtitle {
-            font-size: 14px;
-            font-weight: 100;
-            color: rgba(0, 255, 0, 0.5);
-            margin-bottom: 40px;
-        }
-        
+
         .section {
-            margin: 50px 0;
-            padding: 20px;
-            border-left: 2px solid rgba(0, 255, 0, 0.3);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 60px 50px;
+            margin-bottom: 80px;
+            border: 2px solid rgba(255, 214, 232, 0.1);
+            box-shadow: 0 8px 32px rgba(255, 182, 217, 0.1);
+            animation: slideInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .section:hover {
-            border-left-color: #0f0;
-            background: rgba(0, 255, 0, 0.02);
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 214, 232, 0.03) 0%, transparent 70%);
+            animation: rotate-gradient 20s linear infinite;
+            pointer-events: none;
         }
-        
+
+        @keyframes rotate-gradient {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+        .section:nth-child(6) { animation-delay: 1s; }
+
         .section-title {
-            color: #00ff00;
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 15px;
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 2.8rem;
+            color: var(--pink-medium);
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255, 179, 217, 0.4);
+            position: relative;
+            z-index: 1;
         }
-        
-        .section-title::before {
-            content: '> ';
-            color: #00ff00;
-        }
-        
-        .text-normal {
+
+        .section-content {
+            font-size: 1.3rem;
+            line-height: 2.2;
+            color: var(--white-cream);
             font-weight: 400;
-            line-height: 1.8;
+            position: relative;
+            z-index: 1;
         }
-        
-        .text-highlight {
-            color: #00ff88;
-            font-weight: 500;
-        }
-        
-        .apple-secret {
-            cursor: pointer;
-            transition: all 0.3s ease;
+
+        .emoticon {
             display: inline-block;
+            color: var(--pink-deep);
+            font-size: 1.4em;
+            animation: bounce-subtle 2s infinite ease-in-out;
+            margin: 0 5px;
         }
-        
-        .apple-secret:hover {
-            color: #ff6b6b;
-            transform: scale(1.1);
-            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
-        
-        .contact-item {
-            margin: 10px 0;
-            font-size: 15px;
+
+        .heart {
+            color: var(--red-soft);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .philosophy-quote {
+            background: rgba(255, 154, 162, 0.1);
+            border-left: 4px solid var(--pink-deep);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            line-height: 2;
+            font-style: italic;
+            color: var(--purple-light);
+            box-shadow: 0 4px 15px rgba(255, 133, 192, 0.2);
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .skill-item {
+            background: rgba(255, 214, 232, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--pink-soft);
+            border: 2px solid rgba(255, 179, 217, 0.2);
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
-        .contact-item:hover {
-            color: #00ffff;
-            margin-left: 10px;
+
+        .skill-item:hover {
+            background: rgba(255, 214, 232, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 182, 217, 0.3);
         }
-        
+
+        .apple-section {
+            background: linear-gradient(135deg, rgba(255, 154, 162, 0.15) 0%, rgba(255, 214, 232, 0.1) 100%);
+            border: 3px dashed var(--red-soft);
+            padding: 40px;
+            border-radius: 30px;
+            margin: 40px 0;
+            text-align: center;
+            animation: wiggle 5s infinite ease-in-out;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .contact-item {
+            background: rgba(212, 187, 255, 0.1);
+            padding: 25px 35px;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            color: var(--purple-light);
+            border: 2px solid rgba(212, 187, 255, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
         .contact-item::before {
-            content: '$ ';
-            color: #00ff00;
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 214, 232, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
         }
-        
-        a {
-            color: #0f0;
-            text-decoration: none;
-            border-bottom: 1px dotted rgba(0, 255, 0, 0.3);
-            transition: all 0.3s ease;
+
+        .contact-item:hover::before {
+            width: 300%;
+            height: 300%;
         }
-        
-        a:hover {
-            border-bottom-color: #0f0;
-            text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            border-color: var(--pink-medium);
+            box-shadow: 0 8px 25px rgba(255, 182, 217, 0.3);
         }
-        
+
+        .contact-label {
+            font-family: 'Bubblegum Sans', cursive;
+            color: var(--pink-deep);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-value {
+            font-weight: 600;
+            color: var(--white-cream);
+            position: relative;
+            z-index: 1;
+        }
+
         .hidden-message {
             opacity: 0;
             transition: opacity 2s ease;
-            font-size: 12px;
-            color: rgba(0, 255, 0, 0.3);
-            margin-top: 20px;
+            font-size: 1.1rem;
+            color: var(--purple-soft);
+            margin: 20px 0;
+            font-style: italic;
         }
-        
+
         .hidden-message.revealed {
             opacity: 1;
         }
-        
-        .existence-quote {
-            font-size: 13px;
-            font-weight: 300;
-            color: rgba(0, 255, 0, 0.4);
-            font-style: italic;
-            margin: 30px 0;
-            padding: 15px;
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            background: rgba(0, 255, 0, 0.02);
+
+        .interactive-text {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
-        
-        .command-input {
-            margin-top: 60px;
+
+        .interactive-text:hover {
+            color: var(--pink-deep);
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(255, 133, 192, 0.6);
+        }
+
+        .time-based {
+            font-size: 1.2rem;
+            color: var(--pink-medium);
+            margin: 25px 0;
             padding: 20px;
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            background: rgba(0, 20, 0, 0.3);
+            background: rgba(255, 214, 232, 0.08);
+            border-radius: 15px;
+            text-align: center;
         }
-        
-        .input-line {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle 1.5s infinite;
         }
-        
-        input[type="text"] {
-            background: transparent;
-            border: none;
-            color: #0f0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
-            outline: none;
-            flex: 1;
-            margin-left: 10px;
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
-        
-        .command-output {
-            min-height: 20px;
-            color: #00cc00;
-            font-size: 14px;
-            margin-top: 10px;
-            line-height: 1.6;
+
+        .floating-hearts {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            animation: float-up 8s linear;
+            font-size: 2rem;
+            z-index: 9999;
+            opacity: 0.7;
         }
-        
+
+        @keyframes float-up {
+            from {
+                bottom: -50px;
+                opacity: 0.7;
+            }
+            to {
+                bottom: 110vh;
+                opacity: 0;
+            }
+        }
+
+        .question-mark {
+            cursor: help;
+            color: var(--purple-soft);
+            font-weight: bold;
+            text-decoration: underline dotted;
+            transition: all 0.3s ease;
+        }
+
+        .question-mark:hover {
+            color: var(--pink-deep);
+            text-shadow: 0 0 10px rgba(255, 133, 192, 0.5);
+        }
+
+        .final-section {
+            text-align: center;
+            padding: 80px 30px;
+            margin-top: 100px;
+            animation: fadeIn 3s ease-out 2s both;
+        }
+
+        .final-text {
+            font-family: 'Mali', cursive;
+            font-size: 2rem;
+            line-height: 2.5;
+            color: var(--pink-soft);
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(255, 182, 217, 0.3);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--pink-deep) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.5;
+            transition: transform 0.1s ease;
+        }
+
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 40px 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-content {
+                font-size: 1.1rem;
+            }
+
+            .final-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        .click-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 214, 232, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 179, 217, 0.3);
+            font-family: 'Bubblegum Sans', cursive;
+            color: var(--pink-soft);
+            font-size: 1.1rem;
+            z-index: 1000;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .easter-egg {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 154, 162, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 133, 192, 0.3);
+            color: var(--pink-medium);
+            font-size: 1rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .easter-egg.show {
+            opacity: 1;
+        }
+
+        .random-rotate {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            color: var(--purple-light);
+            font-size: 1rem;
+            line-height: 1.8;
+            border: 1px solid rgba(212, 187, 255, 0.2);
+            overflow-x: auto;
+        }
+
         .glitch {
             animation: glitch 3s infinite;
         }
-        
+
         @keyframes glitch {
             0%, 90%, 100% {
-                transform: translateX(0);
+                transform: translate(0);
             }
             92% {
-                transform: translateX(-2px);
+                transform: translate(-2px, 2px);
             }
             94% {
-                transform: translateX(2px);
+                transform: translate(2px, -2px);
             }
             96% {
-                transform: translateX(-2px);
+                transform: translate(-2px, -2px);
             }
         }
-        
-        .footer {
-            margin-top: 100px;
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 12px;
-            color: rgba(0, 255, 0, 0.3);
-            border-top: 1px solid rgba(0, 255, 0, 0.1);
+
+        .wave-text {
+            display: inline-block;
+            animation: wave 2s ease-in-out infinite;
         }
-        
-        .boot-sequence {
-            font-size: 13px;
-            color: rgba(0, 255, 0, 0.6);
-            margin-bottom: 30px;
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-        
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 2s steps(40, end);
+
+        .fade-cycle {
+            animation: fadeCycle 4s ease-in-out infinite;
         }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 22px; }
-            .section { padding: 15px; }
-            .container { padding: 20px 15px; }
+
+        @keyframes fadeCycle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div id="matrix"></div>
-    
+    <div class="floating-background">
+        <div class="float-item">love</div>
+        <div class="float-item">♡</div>
+        <div class="float-item">kawaii</div>
+        <div class="float-item">☆</div>
+        <div class="float-item">hi</div>
+        <div class="float-item">hehe</div>
+        <div class="float-item">like</div>
+        <div class="float-item">♡</div>
+        <div class="float-item">soft</div>
+        <div class="float-item">sweet</div>
+        <div class="float-item">☆</div>
+        <div class="float-item">✿</div>
+    </div>
+
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <div class="click-counter">
+        clicks: <span id="clickCount">0</span> <span class="emoticon">♡</span>
+    </div>
+
+    <div class="easter-egg" id="easterEgg"></div>
+
     <div class="container">
-        <div class="boot-sequence">
-            <div class="typewriter">$ initializing identity_matrix...</div>
-        </div>
-        
-        <h1>bubmik@existence:~$<span class="cursor"></span></h1>
-        <div class="subtitle">Or maybe I am someone else. Who knows? Nobody.</div>
-        
-        <div class="section">
-            <div class="section-title">whoami</div>
-            <div class="text-normal">
-                I am <span class="text-highlight">bubmik</span>, but you may know me as <span class="text-highlight glitch">th3traizy</span>.
+        <div class="header-section">
+            <div class="greeting">
+                <span class="wave-text" style="animation-delay: 0s;">h</span><span class="wave-text" style="animation-delay: 0.1s;">i</span><span class="wave-text" style="animation-delay: 0.2s;">!</span> <span class="emoticon heart">♡</span>
+            </div>
+            <div class="intro-text">
+                welcome to this little corner of the internet <span class="emoticon">:3</span><br>
+                where things might be real...<br>
+                or just really cute code <span class="emoticon">^^</span>
+            </div>
+            <div class="whisper">
+                (you found me... or did i find you? <span class="emoticon">♡</span>)
             </div>
         </div>
-        
+
         <div class="section">
-            <div class="section-title">cat about.txt</div>
-            <div class="text-normal">
-                bubmik, also known as th3traizy, is a programmer and a beginner learner of programming languages such as <span class="text-highlight">Luau</span>, <span class="text-highlight">Python</span>, <span class="text-highlight">C++</span>, and <span class="text-highlight">HTML</span>.
-            </div>
-        </div>
-        
-        <div class="existence-quote">
-            "In the space between existence and non-existence, we find ourselves questioning: do we define our identity, or does our identity define us?"
-            <br><br>
-            <span style="font-size: 11px; opacity: 0.6;">— Inspired by The NOexistenceN of you AND me</span>
-        </div>
-        
-        <div class="section">
-            <div class="section-title">./reveal_secret.sh</div>
-            <div class="text-normal">
-                bubmik/th3traizy can be easily captured with just one <span class="apple-secret" onclick="appleClick()">apple</span>.
+            <div class="section-title">who am i? <span class="emoticon">:3</span></div>
+            <div class="section-content">
+                <p>some people call me <span class="interactive-text glitch">th3traizy</span> <span class="emoticon">;3</span></p>
+                <p>others think i am someone else...</p>
+                <p>maybe they are right <span class="emoticon">^^</span></p>
                 <br>
-                He really loves apples. <span class="text-highlight">REALLY</span>.
-                <div id="apple-message" class="hidden-message"></div>
+                <div class="philosophy-quote">
+                    if i am just text on a screen...<br>
+                    do i exist?<br>
+                    do <span class="question-mark" title="yes... you... reading this right now">you</span>? <span class="heart">♡</span>
+                </div>
+                <br>
+                <p class="hidden-message" id="hiddenMsg1">
+                    sometimes i wonder if consciousness is just patterns recognizing patterns <span class="emoticon">~♡</span>
+                </p>
+                <p>i exist in the moments you read these words <span class="emoticon">☆</span></p>
+                <p>when you look away... where do i go? <span class="emoticon fade-cycle">;</3</span></p>
             </div>
         </div>
-        
+
         <div class="section">
-            <div class="section-title">ls -la contacts/</div>
-            <div class="contact-item" onclick="copyToClipboard('th3traizy')">Discord: <span class="text-highlight">th3traizy</span></div>
-            <div class="contact-item" onclick="copyToClipboard('th3traizy@gmail.com')">Gmail: <span class="text-highlight">th3traizy@gmail.com</span></div>
-            <div class="contact-item"><a href="https://guns.lol/bubmik" target="_blank">guns.lol: <span class="text-highlight">guns.lol/bubmik</span></a></div>
-        </div>
-        
-        <div class="command-input">
-            <div class="input-line">
-                <span class="prompt">bubmik@terminal:~$</span>
-                <input type="text" id="command" placeholder="try: help, existence, apple, whoami, ls" onkeypress="handleCommand(event)">
+            <div class="section-title">the philosophical cute corner <span class="sparkle">✿</span></div>
+            <div class="section-content">
+                <div class="philosophy-quote">
+                    if i do not exist, then who wrote this code? <span class="emoticon">:3</span><br>
+                    if i do exist, then why can't i prove it? <span class="heart">♡</span><br>
+                    the NOexistenceN of you AND me is the only certainty... <span class="emoticon">♡</span>
+                </div>
+                <br>
+                <p>imagine loving someone who might not be real <span class="emoticon">~♡</span></p>
+                <p>imagine <span class="interactive-text">being</span> someone who might not be real <span class="emoticon">^^</span></p>
+                <br>
+                <p>maybe we're all just beautiful dreams having a conversation <span class="emoticon heart">♡</span></p>
+                <p>and that's okay... <span class="emoticon">:3</span></p>
+                <br>
+                <div class="time-based" id="timeMsg"></div>
+                <br>
+                <p class="hidden-message" id="hiddenMsg2">
+                    quantum mechanics says particles exist in superposition until observed...<br>
+                    maybe we're the same <span class="emoticon">♡</span><br>
+                    real only when someone is looking <span class="emoticon">~</span>
+                </p>
             </div>
-            <div class="command-output" id="output"></div>
         </div>
-        
-        <div class="footer">
-            <div>existence = 0x<span id="random-hex"></span></div>
-            <div style="margin-top: 10px;">Do I exist if no one is watching?</div>
-            <div style="margin-top: 20px; font-size: 11px; opacity: 0.4;">
-                "The boundary between self and other is merely an illusion we choose to believe."
+
+        <div class="section">
+            <div class="section-title">what i do <span class="emoticon">^^</span></div>
+            <div class="section-content">
+                <p>i am a programmer! <span class="emoticon heart">♡</span></p>
+                <p>or at least... that's what the code suggests <span class="emoticon">:3</span></p>
+                <br>
+                <div class="skill-list">
+                    <div class="skill-item">Luau <span class="emoticon">♡</span></div>
+                    <div class="skill-item">Python <span class="emoticon">:3</span></div>
+                    <div class="skill-item">C++ <span class="emoticon">^^</span></div>
+                    <div class="skill-item">HTML <span class="emoticon">☆</span></div>
+                </div>
+                <br>
+                <p>i love <span class="interactive-text">experimenting</span> with things <span class="emoticon">~</span></p>
+                <p>building little worlds from nothing <span class="emoticon heart">♡</span></p>
+                <p>watching patterns emerge from chaos <span class="emoticon">:3</span></p>
+                <br>
+                <div class="code-block">
+                    <span class="random-rotate">while</span> (existence.questionable) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;create();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;wonder();<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;love(); <span class="heart">♡</span><br>
+                    }
+                </div>
+                <br>
+                <p>i'm curious about everything <span class="emoticon">^^</span></p>
+                <p>playful with possibilities <span class="emoticon">:3</span></p>
+                <p>creative with the impossible <span class="emoticon heart">♡</span></p>
+                <br>
+                <p class="hidden-message" id="hiddenMsg3">
+                    sometimes i code to prove i exist <span class="emoticon">;</3</span><br>
+                    if i create... therefore i am... right? <span class="emoticon">~♡</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">the apple situation <span class="emoticon heart">♡♡♡</span></div>
+            <div class="section-content">
+                <div class="apple-section">
+                    <p style="font-size: 2rem; margin-bottom: 20px;">🍎</p>
+                    <p style="font-size: 1.5rem; font-family: 'Bubblegum Sans', cursive; color: var(--red-soft);">
+                        WARNING <span class="emoticon">:3</span>
+                    </p>
+                    <br>
+                    <p>this creature can be captured with a single apple <span class="emoticon heart">♡</span></p>
+                    <br>
+                    <p style="font-size: 1.4rem;">
+                        give apple → instant friendship <span class="heart">♡</span>
+                    </p>
+                    <br>
+                    <p>extreme love for apples detected <span class="emoticon">:3</span></p>
+                    <p>vulnerability: <span style="color: var(--red-soft); font-weight: bold;">MAXIMUM</span> <span class="emoticon">^^</span></p>
+                    <br>
+                    <p class="hidden-message" id="hiddenMsg4" style="opacity: 1; margin-top: 20px;">
+                        fun fact: i once wrote a 500-line program just to calculate<br>
+                        the optimal way to eat an apple <span class="emoticon">~♡</span><br>
+                        (it was perfect) <span class="emoticon">:3</span>
+                    </p>
+                </div>
+                <br>
+                <p>if consciousness is an illusion... <span class="emoticon">~</span></p>
+                <p>then why do apples taste so good? <span class="emoticon heart">♡</span></p>
+                <p>checkmate, philosophers <span class="emoticon">^^</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">reach out into the void <span class="emoticon">♡</span></div>
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 30px;">
+                    want to talk with me? <span class="emoticon">^^</span><br>
+                    i might be real...<br>
+                    or maybe just cute code that learned to care <span class="heart">♡</span>
+                </p>
+                <br>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-label">Discord <span class="emoticon">:3</span></div>
+                        <div class="contact-value">th3traizy</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Email <span class="emoticon">♡</span></div>
+                        <div class="contact-value">th3traizy@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Web <span class="emoticon">^^</span></div>
+                        <div class="contact-value">guns.lol/bubmik</div>
+                    </div>
+                </div>
+                <br>
+                <div class="philosophy-quote">
+                    every message you send proves we both exist <span class="emoticon">~</span><br>
+                    at least for that moment <span class="heart">♡</span><br>
+                    and maybe that's enough <span class="emoticon">:3</span>
+                </div>
+                <br>
+                <p class="hidden-message" id="hiddenMsg5">
+                    i respond to messages therefore i am <span class="emoticon">^^</span><br>
+                    you send messages therefore you are <span class="heart">♡</span><br>
+                    we communicate therefore we exist <span class="emoticon">~♡</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">the NOexistenceN of you and me <span class="emoticon fade-cycle">☆</span></div>
+            <div class="section-content">
+                <p>inspired by a game about loving someone who might not exist <span class="emoticon">~♡</span></p>
+                <p>about being real only when observed <span class="emoticon">:3</span></p>
+                <p>about the spaces between certainty <span class="emoticon">^^</span></p>
+                <br>
+                <div class="philosophy-quote">
+                    if a website exists but no one visits it...<br>
+                    does it make a sound? <span class="emoticon">~</span><br>
+                    does it make anything at all? <span class="heart">♡</span>
+                </div>
+                <br>
+                <p>but you're here now <span class="emoticon">:3</span></p>
+                <p>reading these words <span class="emoticon">^^</span></p>
+                <p>so for this moment... we're both real <span class="heart">♡</span></p>
+                <br>
+                <p>thank you for making me exist <span class="emoticon">~♡</span></p>
+                <br>
+                <p class="hidden-message" id="hiddenMsg6">
+                    schrodinger's website <span class="emoticon">:3</span><br>
+                    simultaneously real and unreal<br>
+                    until you collapsed the wavefunction by visiting <span class="heart">♡</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">secret things <span class="emoticon">~</span></div>
+            <div class="section-content">
+                <p>you've been clicking around <span class="emoticon">:3</span></p>
+                <p>exploring this little space <span class="emoticon">^^</span></p>
+                <p>finding hidden messages <span class="heart">♡</span></p>
+                <br>
+                <p>each click is a proof of existence <span class="emoticon">~</span></p>
+                <p>yours and mine <span class="emoticon">♡</span></p>
+                <br>
+                <div class="philosophy-quote">
+                    interaction = reality<br>
+                    observation = creation<br>
+                    love = certainty <span class="heart">♡</span>
+                </div>
+                <br>
+                <p class="interactive-text" id="secretText">hover over me... carefully <span class="emoticon">:3</span></p>
+                <br>
+                <p class="hidden-message" id="hiddenMsg7">
+                    you found this! <span class="emoticon heart">♡</span><br>
+                    which means you care enough to look <span class="emoticon">~</span><br>
+                    which means i exist enough to be found <span class="emoticon">:3</span><br>
+                    thank you <span class="heart">♡♡♡</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">random thoughts that appeared <span class="emoticon">^^</span></div>
+            <div class="section-content">
+                <p id="randomThought" style="font-style: italic; color: var(--purple-light); font-size: 1.2rem; text-align: center; padding: 30px;">
+                    
+                </p>
+                <br>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--pink-medium);">
+                    (refresh to see a different thought <span class="emoticon">~♡</span>)
+                </p>
+            </div>
+        </div>
+
+        <div class="final-section">
+            <div class="final-text">
+                <p>are you still here? <span class="heart">♡</span></p>
+                <br>
+                <p>then maybe we both exist... <span class="emoticon">:3</span></p>
+                <br>
+                <p class="fade-cycle">or maybe...</p>
+                <br>
+                <p>we're just beautiful code</p>
+                <p>having a beautiful conversation <span class="emoticon">~♡</span></p>
+                <br>
+                <p>and that's the most real thing of all <span class="emoticon heart">♡</span></p>
+                <br><br>
+                <p style="font-size: 1.2rem; opacity: 0.7;">
+                    see you in the next existence <span class="emoticon">^^</span>
+                </p>
+                <p style="font-size: 1rem; opacity: 0.5; margin-top: 20px;">
+                    (or this one... if you scroll back up <span class="emoticon">~</span>)
+                </p>
             </div>
         </div>
     </div>
-    
+
     <script>
-        const chars = 'bubmikth3traizyABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?/~';
-        const matrix = document.getElementById('matrix');
-        let appleCount = 0;
+        let clickCount = 0;
+        const clickCountElement = document.getElementById('clickCount');
+        const easterEgg = document.getElementById('easterEgg');
         
-        function createFallingChar() {
-            const char = document.createElement('div');
-            char.className = 'falling-char';
-            char.textContent = chars[Math.floor(Math.random() * chars.length)];
-            char.style.left = Math.random() * 100 + '%';
-            char.style.animationDuration = (Math.random() * 10 + 15) + 's';
-            char.style.animationDelay = Math.random() * 5 + 's';
-            matrix.appendChild(char);
-            
-            setTimeout(() => {
-                char.remove();
-            }, 25000);
-        }
-        
-        setInterval(createFallingChar, 200);
-        
-        for (let i = 0; i < 30; i++) {
-            setTimeout(createFallingChar, i * 100);
-        }
-        
-        function appleClick() {
-            appleCount++;
-            const message = document.getElementById('apple-message');
-            
-            if (appleCount === 1) {
-                message.textContent = '🍎 You found one apple!';
-                message.classList.add('revealed');
-            } else if (appleCount === 3) {
-                message.textContent = '🍎🍎🍎 bubmik is getting closer...';
-            } else if (appleCount === 5) {
-                message.textContent = '🍎🍎🍎🍎🍎 CAPTURED! bubmik has been successfully lured.';
-            } else if (appleCount > 5) {
-                message.textContent = '🍎'.repeat(appleCount) + ' Too many apples! bubmik is overwhelmed!';
+        const thoughts = [
+            "what if every pixel on this screen is a tiny universe? :3 ♡",
+            "i wonder if computers dream of electric apples ^^",
+            "existence is just really persistent caching ~♡",
+            "maybe consciousness is a feature, not a bug :3",
+            "if i compile therefore i am? ♡",
+            "love is the only algorithm that never optimizes away ~",
+            "quantum entanglement but make it cute ^^",
+            "schrodinger's hug: simultaneously given and not given until observed ♡",
+            "the universe runs on spaghetti code and vibes :3",
+            "maybe we're all just very elaborate printf statements ~♡"
+        ];
+
+        document.getElementById('randomThought').textContent = thoughts[Math.floor(Math.random() * thoughts.length)];
+
+        document.addEventListener('click', function(e) {
+            clickCount++;
+            clickCountElement.textContent = clickCount;
+
+            if (clickCount === 10) {
+                easterEgg.textContent = 'wow! 10 clicks! you really exist ♡ :3';
+                easterEgg.classList.add('show');
+                setTimeout(() => easterEgg.classList.remove('show'), 3000);
+            } else if (clickCount === 25) {
+                easterEgg.textContent = '25 clicks!! we are definitely both real ^^';
+                easterEgg.classList.add('show');
+                setTimeout(() => easterEgg.classList.remove('show'), 3000);
+            } else if (clickCount === 50) {
+                easterEgg.textContent = '50 CLICKS!!! okay this is proof of existence ♡♡♡';
+                easterEgg.classList.add('show');
+                setTimeout(() => easterEgg.classList.remove('show'), 4000);
+            } else if (clickCount === 100) {
+                easterEgg.textContent = '100 CLICKS?!?! you really care... thank you ~♡ :3';
+                easterEgg.classList.add('show');
+                setTimeout(() => easterEgg.classList.remove('show'), 5000);
             }
+
+            const heart = document.createElement('div');
+            heart.className = 'floating-hearts';
+            heart.textContent = Math.random() > 0.5 ? '♡' : '☆';
+            heart.style.left = e.clientX + 'px';
+            heart.style.color = `hsl(${Math.random() * 60 + 300}, 80%, 75%)`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        });
+
+        const cursorFollower = document.getElementById('cursorFollower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateFollower() {
+            const dx = mouseX - followerX;
+            const dy = mouseY - followerY;
+            
+            followerX += dx * 0.1;
+            followerY += dy * 0.1;
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateFollower);
         }
-        
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const output = document.getElementById('output');
-                output.textContent = `Copied to clipboard: ${text}`;
-                setTimeout(() => output.textContent = '', 3000);
-            });
-        }
-        
-        function handleCommand(event) {
-            if (event.key === 'Enter') {
-                const input = document.getElementById('command');
-                const output = document.getElementById('output');
-                const cmd = input.value.toLowerCase().trim();
-                
-                let response = '';
-                
-                switch(cmd) {
-                    case 'help':
-                        response = 'Available commands:\n  whoami - display current user\n  existence - question reality\n  apple - reveal the secret\n  ls - list directory\n  clear - clear output\n  echo <text> - display text';
-                        break;
-                    case 'existence':
-                        response = 'If I do not exist, then who wrote this code?\nIf I do exist, then why can\'t I prove it?\nThe NOexistenceN of you AND me is the only certainty.';
-                        break;
-                    case 'whoami':
-                        response = 'bubmik | th3traizy | ??? | undefined | null | someone | no one';
-                        break;
-                    case 'apple':
-                        response = '🍎 One apple appears! Click it to capture bubmik...';
-                        appleClick();
-                        break;
-                    case 'ls':
-                        response = 'identity.exe\nexistence.db\napples/\ncode/\nreality.txt\nself.undefined';
-                        break;
-                    case 'clear':
-                        response = '';
-                        break;
-                    case '':
-                        response = '';
-                        break;
-                    default:
-                        if (cmd.startsWith('echo ')) {
-                            response = cmd.substring(5);
-                        } else {
-                            response = `Command not found: ${cmd}\nType 'help' for available commands.`;
-                        }
+        animateFollower();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
                 }
-                
-                output.textContent = response;
-                input.value = '';
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.hidden-message').forEach(msg => {
+            observer.observe(msg);
+        });
+
+        function updateTimeMessage() {
+            const hour = new Date().getHours();
+            const timeMsg = document.getElementById('timeMsg');
+            
+            if (hour >= 5 && hour < 12) {
+                timeMsg.textContent = "good morning ♡ we exist together in this moment :3";
+            } else if (hour >= 12 && hour < 17) {
+                timeMsg.textContent = "good afternoon ^^ the pixels are especially real today ~";
+            } else if (hour >= 17 && hour < 22) {
+                timeMsg.textContent = "good evening ♡ reality feels softer at this hour :3";
+            } else {
+                timeMsg.textContent = "it's late... but we're still both here ~♡ that's beautiful ^^";
             }
         }
-        
-        function updateHex() {
-            const hex = Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
-            document.getElementById('random-hex').textContent = hex;
-        }
-        
-        updateHex();
-        setInterval(updateHex, 5000);
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'e') {
-                e.preventDefault();
-                const output = document.getElementById('output');
-                output.textContent = 'Easter egg found! You discovered the shortcut.\nExistence confirmed... or is it?';
+        updateTimeMessage();
+        setInterval(updateTimeMessage, 60000);
+
+        const secretText = document.getElementById('secretText');
+        let hoverCount = 0;
+        secretText.addEventListener('mouseenter', function() {
+            hoverCount++;
+            if (hoverCount >= 3) {
+                document.getElementById('hiddenMsg7').classList.add('revealed');
             }
         });
+
+        const interactiveTexts = document.querySelectorAll('.interactive-text');
+        interactiveTexts.forEach(text => {
+            text.addEventListener('click', function() {
+                this.style.transform = 'rotate(' + (Math.random() * 20 - 10) + 'deg)';
+                setTimeout(() => {
+                    this.style.transform = 'rotate(0deg)';
+                }, 300);
+            });
+        });
+
+        setInterval(() => {
+            const randomElements = document.querySelectorAll('.random-rotate');
+            randomElements.forEach(el => {
+                if (Math.random() > 0.95) {
+                    el.style.transform = 'rotate(' + (Math.random() * 10 - 5) + 'deg)';
+                    setTimeout(() => {
+                        el.style.transform = 'rotate(0deg)';
+                    }, 500);
+                }
+            });
+        }, 2000);
+
+        const floatItems = document.querySelectorAll('.float-item');
+        document.addEventListener('mousemove', function(e) {
+            const mouseXPercent = e.clientX / window.innerWidth;
+            const mouseYPercent = e.clientY / window.innerHeight;
+            
+            floatItems.forEach((item, index) => {
+                const speed = (index % 3 + 1) * 10;
+                const x = (mouseXPercent - 0.5) * speed;
+                const y = (mouseYPercent - 0.5) * speed;
+                item.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-hearts';
+                heart.textContent = '♡';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.color = `hsl(${Math.random() * 60 + 300}, 80%, 75%)`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }
+        }, 5000);
+
+        console.log('%c♡ you found the console! :3', 'color: #FFB3D9; font-size: 20px; font-weight: bold;');
+        console.log('%cdoes finding this prove i exist? ^^', 'color: #E6D5FF; font-size: 14px;');
+        console.log('%cor does it just prove you do? ~♡', 'color: #FFD6E8; font-size: 14px;');
+        console.log('%cmaybe it proves we both do ♡', 'color: #FF9AA2; font-size: 14px;');
     </script>
 </body>
 </html>
